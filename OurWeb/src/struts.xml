@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <package name="lee" extends="struts-default">
+        <interceptors>
+            <interceptor name="my" class="edu.uestc.ginkgo.action.AuthorityInterceptor"/>
+            <interceptor-stack name="mydefault">
+               <interceptor-ref name="defaultStack"></interceptor-ref>
+               <interceptor-ref name="my"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        
+        <global-results>
+            <result name="login">/login.jsp</result>
+         </global-results>
+         
+        <action name="regist" class="registAction">
+            <result name="success">/registsuccess.jsp</result>
+            <result name="error">/registfail.jsp</result>
+        </action>
+        
+        <action name="login" class="loginAction">
+            <result name="success">/loginsuccess.jsp</result>
+            <result name="error">/loginfail.jsp</result>
+        </action>
+        
+        <action name="logout" class="logoutAction">
+             <result>/index.jsp</result>
+             <interceptor-ref name="mydefault"></interceptor-ref>
+        </action>
+        
+        <action name="update" class="updateAction">
+              <result>/updatesuccess.jsp</result>
+              <result name="error">/updatefail.jsp</result>
+              <interceptor-ref name="mydefault"></interceptor-ref>
+        </action>
+        <action name="viewBook">
+          <result name="success">/page/viewBook.jsp</result>
+          <interceptor-ref name="mydefault"></interceptor-ref>
+        </action>
+    </package>
+
+</struts>

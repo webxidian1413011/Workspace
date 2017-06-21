@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+<!-- 定义数据源bean，使用C3P0 -->
+<!--	
+ <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+  <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+  <property name="jdbcUrl" value="jdbc:mysql://localhost/student"></property>
+  <property name="user" value="root"></property>
+  <property name="password" value="root"></property>
+  <property name="maxPoolSize" value="40"></property>
+  <property name="minPoolSize" value="1"></property>
+  <property name="initialPoolSize" value="1"></property>
+</bean>
+ 
+-->
+<!-- 定义数据源bean,使用BasicDataSource -->
+ <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+  <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+  <property name="url" value="jdbc:mysql://localhost/ssh"></property>
+  <property name="username" value="root"></property>
+  <property name="password" value="1234"></property>
+</bean>
+
+
+<!--  定义hibernate的SessionFatory--> 
+<bean  id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+  <property name="dataSource" ref="dataSource"></property>
+  <property name="mappingResources">
+    <list>
+    <!--   以下用来列出所有PO映射文件--> 
+      <value>edu/uestc/ginkgo/user/User.hbm.xml</value>
+    </list>
+  </property>
+  <property name="hibernateProperties">
+    <props>
+      <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+      <prop key="hibernate.hbm2ddl.auto">update</prop>
+    </props>
+  </property>
+</bean>
+
+
+
+
+<!-- 事务管理器bean -->
+<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+  <property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+
+
+
+
+<!-- 配置事务切面bean，为其制定事务管理器 -->
+<tx:advice id="txAdvice" transaction-manager="transactionManager">
+  <tx:attributes>
+     <tx:method name="get*" read-only="true"/>
+     <tx:method name="*"/>
+  </tx:attributes>
+</tx:advice>
+
+
+<!-- 配置一个切入点，匹配edu.uestc.ginkgo.service包下所有 以Impl结尾的类-->
+<aop:config>
+  <aop:pointcut id="pcut" expression="execution(* edu.uestc.ginkgo.service.impl.*Impl.*(..))"/>
+  <!-- 制定在pointcut切入点应用txAdvice事务切面 -->
+  <aop:advisor advice-ref="txAdvice" pointcut-ref="pcut"/>
+</aop:config>
+
+
+
+<!-- 定义DAO Bean -->
+<bean id="userDao" class="edu.uestc.ginkgo.dao.impl.UserDaoHibernate">
+<property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+
+
+<!-- 业务逻辑组件 -->
+<bean id="leeService" class="edu.uestc.ginkgo.service.impl.LeeServiceImpl">
+<property name="userDao" ref="userDao"></property>
+</bean>
+
+<!-- Spring管理的Action实例 -->
+<bean id="registAction" class="edu.uestc.ginkgo.action.RegistAction" scope="prototype">
+ <property name="leeService" ref="leeService"></property>
+</bean>
+<bean id="loginAction" class="edu.uestc.ginkgo.action.LoginAction" scope="prototype">
+<property name="leeService" ref="leeService"></property>
+</bean>
+<bean id="logoutAction" class="edu.uestc.ginkgo.action.LogoutAction" scope="prototype">
+<property name="leeService" ref="leeService"></property>
+</bean>
+<bean id="updateAction" class="edu.uestc.ginkgo.action.UpdateAction" scope="prototype">
+<property name="leeService" ref="leeService"></property>
+</bean>
+
+
+</beans>

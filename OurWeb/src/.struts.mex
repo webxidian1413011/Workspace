@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="lee" location="185,165" size="770,315">
+    <action name="regist" location="555,47" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="registsuccess.jsp" />
+      </result>
+      <result name="error">
+        <resourceEdge source="error" routing="0" target="registfail.jsp" />
+      </result>
+    </action>
+    <action name="login" location="555,222" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="loginsuccess.jsp" />
+      </result>
+      <result name="error">
+        <resourceEdge source="error" routing="0" target="loginfail.jsp" />
+      </result>
+    </action>
+    <action name="logout" location="310,232" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="index.jsp" />
+      </result>
+    </action>
+    <action name="update" location="65,222" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="updatesuccess.jsp" />
+      </result>
+      <result name="error">
+        <resourceEdge source="error" routing="0" target="updatefail.jsp" />
+      </result>
+    </action>
+    <action name="viewBook" location="65,57" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="viewBook.jsp" />
+      </result>
+    </action>
+  </package>
+  <webResource name="registsuccess.jsp" path="/registsuccess.jsp" location="997,185" size="150,55" />
+  <webResource name="registfail.jsp" path="/registfail.jsp" location="765,10" size="150,55" />
+  <webResource name="loginsuccess.jsp" path="/loginsuccess.jsp" location="754,535" size="150,55" />
+  <webResource name="loginfail.jsp" path="/loginfail.jsp" location="1010,360" size="150,55" />
+  <webResource name="index.jsp" path="/index.jsp" location="520,535" size="150,55" />
+  <webResource name="updatesuccess.jsp" path="/updatesuccess.jsp" location="13,360" size="150,55" />
+  <webResource name="updatefail.jsp" path="/updatefail.jsp" location="271,535" size="150,55" />
+  <webResource name="viewBook.jsp" path="/page/viewBook.jsp" location="10,185" size="150,55" />
+</Struts2Diagram>
+
