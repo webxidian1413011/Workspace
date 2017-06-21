@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>mainpage</title>
+    <link href="style.css" type="text/css" rel="stylesheet">
+	<style type="text/css">
+		body
+		{
+			margin: 0px;
+		}
+		div#container
+		{
+			width: 100%;
+			height: 950px;
+			background-color: darkgray;
+		}
+		div#heading
+		{
+			width: 100%;
+			height: 20%;
+			background-color: darkseagreen;
+		}
+		div#sports
+		{
+			width: 50%;
+			height: 70%;
+			background-image: url("../Web/images/football.jpg");
+			background-repeat: no-repeat;
+			background-size: 100% 100%;
+
+			float:left;
+		}
+		div#entertainment
+		{
+			width: 50%;
+			height: 70%;
+			background-image: url("../Web/images/games.jpg");
+			background-repeat: no-repeat;
+			background-size: 100% 100%;
+			float:left;
+		}
+		div#footing
+		{
+			width: 100%;
+			height:10%;
+			background-color: blanchedalmond;
+			clear:both;
+		}
+	</style><!--总体布局的高度不能使用%定义,内部的布局高度可以使用5定义，因外总体布局已经确定高度,div#中的div可以省略-->
+</head>
+<body>
+	<div id="container">
+		<div id="heading">
+            <br/>
+			<br/>
+			<h1 align="center">欢迎来到网络直播大全</h1>
+		</div>
+		<div id="sports">
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<a href="sports.html" target="_blank"><h1 align="center">体育区</h1></a>
+
+		</div>
+		<div id="entertainment">
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<a href="entertainment.html" target="_blank"><h1 align="center">娱乐区</h1></a>
+        </div>
+		<div id="footing">
+			<br/>
+			<br/>
+			<h4 align="center">@2017 Web1413011</h4>
+		</div>
+	</div>
+</body>
+</html>

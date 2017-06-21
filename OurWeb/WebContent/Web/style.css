@@ -1,0 +1,16 @@
+h1{
+    color: beige;
+}
+#
+h3{
+    color: black;
+    align-content: center;
+}
+p{
+    width: 300px;
+    height: 70px;
+    padding: 10px;
+    /*padding表示内边距*/
+    background-color: antiquewhite;
+//background-image: url("西电.PNG");
+}
